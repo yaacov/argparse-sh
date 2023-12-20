@@ -93,6 +93,7 @@ parse_args "$@"
 
 # Main script logic
 echo "Hello, $name!"```
+```
 
 Run this script using:
 
