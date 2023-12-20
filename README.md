@@ -2,7 +2,7 @@
 
 ### Introduction
 
-`argparse.sh` contains bash functions that streamlines the management of command-line arguments in Bash scripts, enhancing the robustness and user-friendliness of your code. Its syntax is intentionally designed to be familiar to those who have experience with argument parsing libraries, providing a smooth and intuitive scripting experie.
+`argparse.sh` contains bash functions that streamlines the management of command-line arguments in Bash scripts, enhancing the robustness and user-friendliness of your code. Its syntax is intentionally designed to be familiar to those who have experience with argument parsing libraries, providing a smooth and intuitive scripting experience.
 
 ### Features
 
