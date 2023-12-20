@@ -51,12 +51,13 @@ define_arg "arg_name" ["default"] ["help text"] ["action"] ["required"]
 
 #### Setting Script Description with `set_description`
 
-The `set_description` function sets a description for your script, which appears at the top of the automatically generated help message. Usage is straightforward:
+The optional `set_description` function sets a description for your script, which appears at the top of the automatically generated help message. Usage is straightforward:
 
 ```bash
-
 set_description "Your script description here"
 ```
+
+When not set, the help text will show without a description text.
 
 #### Parsing Arguments with `parse_args`
 
