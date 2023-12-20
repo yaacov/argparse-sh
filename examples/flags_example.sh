@@ -9,6 +9,9 @@ set_description "This script demonstrates handling flags."
 # Define a flag argument
 define_arg "debug" "false" "Enable debug mode" "store_true"
 
+# Check for -h and --help
+check_for_help "$@"
+
 # Parse the arguments
 parse_args "$@"
 
