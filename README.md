@@ -82,13 +82,13 @@ Here's a simple example of a script using argparse.sh:
 # Source the argparse script
 source ./argparse.sh
 
-# Set script description
+# [Optional] Set script description
 set_description "This is a simple script that greets the user."
 
 # Define an argument
 define_arg "name" "" "Name of the user" "string" "true"
 
-# Check for -h and --help
+# [Optional] Check for -h and --help
 check_for_help "$@"
 
 # Parse the arguments
