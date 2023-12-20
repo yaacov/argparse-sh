@@ -92,7 +92,7 @@ define_arg "name" "" "Name of the user" "string" "true"
 parse_args "$@"
 
 # Main script logic
-echo "Hello, $name!"```
+echo "Hello, $name!"
 ```
 
 Run this script using:
