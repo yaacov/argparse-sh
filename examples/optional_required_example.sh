@@ -11,6 +11,9 @@ define_arg "output" "./output.txt" "Path to output file" "string"
 define_arg "verbose" "false" "Enable verbose mode" "store_true"
 define_arg "mode" "" "Operation mode" "string" "true"
 
+# Check for -h and --help
+check_for_help "$@"
+
 # Parse the arguments
 parse_args "$@"
 
