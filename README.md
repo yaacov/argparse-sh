@@ -6,7 +6,7 @@
 
 ### Features
 
-  - Easy Integration: Simply source argparse.sh in your script to start using.
+  - Easy Integration: Simply source `argparse.sh` in your script to start using.
   - Supports Various Argument Types: Handles required, optional, and boolean flag arguments.
   - Default Values: Define default values for optional arguments.
   - Automatic Help Generation: Generates a help message based on defined arguments.
