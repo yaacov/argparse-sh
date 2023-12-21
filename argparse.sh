@@ -4,11 +4,13 @@
 # command-line arguments in Bash scripts 
 
 # Example:
-#   # Define an argument and parse the cli command arguments
 #   define_arg "username" "" "Username for login" "string" "true"
 #   parse_args "$@"
 #
 #   echo "Welcome, $username!"
+#
+#   # Usage:
+#   # ./example.sh --username Alice
 
 # Author: Yaacov Zamir <kobi.zamir@gmail.com>
 # License: MIT License.
