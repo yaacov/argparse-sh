@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# argparse.sh contains bash functions that streamlines the management of
+# command-line arguments in Bash scripts 
+
+# Author: Yaacov Zamir <kobi.zamir@gmail.com>
+# License: MIT License.
+# https://github.com/yaacov/argparse-sh/ 
+
 # Declare an associative array for argument properties
 declare -A ARG_PROPERTIES
 
