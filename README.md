@@ -42,13 +42,13 @@ The `define_arg` function allows you to define a new command-line argument. The 
 define_arg "arg_name" ["default"] ["help text"] ["action"] ["required"]
 ```
 
-| Parameter | Description | Optional |
-| --- | --- | --- |
-| arg_name | Name of the argument | Yes |
-| default | Default value for the argument | Yes |
-| help text | Description of the argument for the help message | Yes |
-| action | Type of the argument (string or store_true for flags) | Yes |
-| required | Whether the argument is required (true or false) | Yes |
+| Parameter | Description | Optional | Default |
+| --- | --- | --- | --- |
+| arg_name | Name of the argument | No | |
+| default | Default value for the argument | Yes | "" |
+| help text | Description of the argument for the help message | Yes | "" |
+| action | Type of the argument (string or store_true for flags) | Yes | "string" |
+| required | Whether the argument is required (true or false) | Yes | "false" |
 
 #### Setting Script Description with `set_description`
 
