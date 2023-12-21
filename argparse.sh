@@ -3,6 +3,13 @@
 # argparse.sh contains bash functions that streamlines the management of
 # command-line arguments in Bash scripts 
 
+# Example:
+#   # Define an argument and parse the cli command arguments
+#   define_arg "username" "" "Username for login" "string" "true"
+#   parse_args "$@"
+#
+#   echo "Welcome, $username!"
+
 # Author: Yaacov Zamir <kobi.zamir@gmail.com>
 # License: MIT License.
 # https://github.com/yaacov/argparse-sh/ 
@@ -12,6 +19,14 @@ declare -A ARG_PROPERTIES
 
 # Variable for the script description
 SCRIPT_DESCRIPTION=""
+
+# Function to display an error message and exit
+# Usage: display_error "Error message"
+display_error() {
+    echo -e "Error: $1\n"
+    show_help
+    exit 1
+}
 
 # Function to set the script description
 # Usage: set_description "Description text"
@@ -27,14 +42,6 @@ define_arg() {
     ARG_PROPERTIES["$arg_name,help"]=${3:-""}    # Help text
     ARG_PROPERTIES["$arg_name,action"]=${4:-"string"} # Action, default is "string"
     ARG_PROPERTIES["$arg_name,required"]=${5:-"false"} # Required flag, default is "false"
-}
-
-# Function to display an error message and exit
-# Usage: display_error "Error message"
-display_error() {
-    echo -e "Error: $1\n"
-    show_help
-    exit 1
 }
 
 # Function to parse command-line arguments
