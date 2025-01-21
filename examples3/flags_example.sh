@@ -4,7 +4,7 @@
 source ./argparse3.sh
 
 # Set script description
-# set_description "This script demonstrates handling flags."
+set_description "This script demonstrates handling flags."
 
 # Define a flag argument
 define_arg "debug" "false" "Enable debug mode" "bool"

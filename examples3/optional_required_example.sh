@@ -4,7 +4,7 @@
 source ./argparse3.sh
 
 # Set script description
-# set_description "This script demonstrates optional and required arguments."
+set_description "This script demonstrates optional and required arguments."
 
 # Define arguments
 define_arg "output" "./output.txt" "Path to output file" "string"

@@ -1,5 +1,5 @@
 #/usr/bin/env bash
-SCRIPT_DESCRIPTION="argspars3.sh is a Bash 3 library for defining script arguments"
+SCRIPT_DESCRIPTION="argsparse3.sh is a Bash 3 library for defining script arguments"
 FLAG_BEHAVIOUR="Add the flag to set the argument to 'true' (don't use '--flag true')"
 
 ARGS_PROPERTIES=()
@@ -9,6 +9,12 @@ _DEFAULT_=1
 _HELP_=2
 _TYPE_=3
 _REQUIRED_=4
+
+# Function to set the script description
+# Usage: set_description "Description text"
+set_description() {
+    SCRIPT_DESCRIPTION="$1"
+}
 
 show_help() {
     local args=( "${ARGS_PROPERTIES[@]}" )
@@ -92,6 +98,6 @@ parse_args() {
                 esac
             fi
         done
-        # break
+        shift # Skip undefined argument
     done
 }

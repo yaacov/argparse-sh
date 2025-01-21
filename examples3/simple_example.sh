@@ -4,7 +4,7 @@
 source ./argparse3.sh
 
 # Define an argument
-define_arg "username" "" "Username for login" "string" "true"
+define_arg "username" "" "Username for login" "string" "required"
 
 # Parse the arguments
 parse_args "$@"
