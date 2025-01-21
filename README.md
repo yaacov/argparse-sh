@@ -12,7 +12,6 @@
 - **Automatic Help Generation**: Generates a help message based on defined arguments.
 - **Error Handling**: Provides user-friendly error messages for missing or incorrect arguments.
 
-
 [![asciicast](https://asciinema.org/a/627909.svg)](https://asciinema.org/a/627909)
 
 ## Installation
