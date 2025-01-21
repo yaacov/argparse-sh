@@ -1,10 +1,10 @@
 # argparse-sh
 
-### Introduction
+## Introduction
 
 `argparse.sh` contains bash functions that streamlines the management of command-line arguments in Bash scripts, enhancing the robustness and user-friendliness of your code. Its syntax is intentionally designed to be familiar to those who have experience with argument parsing libraries, providing a smooth and intuitive scripting experience.
 
-### Features
+## Features
 
   - **Easy Integration**: Simply source `argparse.sh` in your script to start using.
   - **Supports Various Argument Types**: Handles required, optional, and boolean flag arguments.
@@ -15,7 +15,7 @@
 
 [![asciicast](https://asciinema.org/a/627909.svg)](https://asciinema.org/a/627909)
 
-### Installation
+## Installation
 
 clone the script repository.
 
@@ -31,9 +31,9 @@ source /path/to/argparse.sh
 # Your code here
 ```
 
-### Usage
+## Usage
 
-#### Defining Arguments with `define_arg`
+### Defining Arguments with `define_arg`
 
 The `define_arg` function allows you to define a new command-line argument. The syntax is:
 
@@ -50,7 +50,7 @@ define_arg "arg_name" ["default"] ["help text"] ["action"] ["required"]
 | action | Type of the argument (string or store_true for flags) | Yes | "string" |
 | required | Whether the argument is required (true or false) | Yes | "false" |
 
-#### Setting Script Description with `set_description`
+### Setting Script Description with `set_description`
 
 The optional `set_description` function sets a description for your script, which appears at the top of the automatically generated help message. Usage is straightforward:
 
@@ -60,7 +60,7 @@ set_description "Your script description here"
 
 When not set, the help text will show without a description text.
 
-#### Parsing Arguments with `parse_args`
+### Parsing Arguments with `parse_args`
 
 After defining your arguments, use the `parse_args` function to parse the command-line inputs. Simply pass `"$@"` (the array of command-line arguments) to this function:
 
@@ -71,7 +71,7 @@ parse_args "$@"
 
 This function will process the inputs based on the defined arguments and handle errors or help message requests automatically.
 
-### Example
+## Example
 
 Here's a simple example of a script using argparse.sh:
 
@@ -105,10 +105,10 @@ Run this script using:
 ./yourscript.sh --name Alice
 ```
 
-### Contributing
+## Contributing
 
 We warmly welcome contributions to `argparse.sh`. If you have an idea for an improvement or have spotted an issue, feel free to contribute. Start by forking the repository and cloning your fork to your local machine. Create a new branch for your feature or fix. Once you've made your changes, commit them with a clear and descriptive message. After committing your changes, push them to your fork on GitHub. Finally, submit a pull request from your branch to the main repository. We appreciate your efforts in enhancing `argparse.sh` and look forward to your valuable input!
 
-### License
+## License
 
 This project is licensed under the [MIT License](https://github.com/licenses/MIT).
