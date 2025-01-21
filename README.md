@@ -6,11 +6,11 @@
 
 ## Features
 
-  - **Easy Integration**: Simply source `argparse.sh` in your script to start using.
-  - **Supports Various Argument Types**: Handles required, optional, and boolean flag arguments.
-  - **Default Values**: Define default values for optional arguments.
-  - **Automatic Help Generation**: Generates a help message based on defined arguments.
-  - **Error Handling**: Provides user-friendly error messages for missing or incorrect arguments.
+- **Easy Integration**: Simply source `argparse.sh` in your script to start using.
+- **Supports Various Argument Types**: Handles required, optional, and boolean flag arguments.
+- **Default Values**: Define default values for optional arguments.
+- **Automatic Help Generation**: Generates a help message based on defined arguments.
+- **Error Handling**: Provides user-friendly error messages for missing or incorrect arguments.
 
 
 [![asciicast](https://asciinema.org/a/627909.svg)](https://asciinema.org/a/627909)
