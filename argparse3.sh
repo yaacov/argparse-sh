@@ -74,8 +74,11 @@ parse_args() {
     # Check for missing required arguments
     check_required "$@"
     while [[ $# -gt 0 ]]; do
+        key="${1#--}" # remove '--' prefix
+        if ! (echo "${ARGS_PROPERTIES[*]}" | grep "$key" > /dev/null ); then
+            shift # Silently skip undefined argument
+        fi
         for ((i=0; i<${#ARGS_PROPERTIES[*]}; i+=5)); do
-            key="${1#--}" # remove '--' prefix
             if [[ "$key" == "${ARGS_PROPERTIES[i]}" ]]; then
                 case ${ARGS_PROPERTIES[i+_TYPE_]} in
                 'string')
@@ -98,6 +101,5 @@ parse_args() {
                 esac
             fi
         done
-        shift # Skip undefined argument
     done
 }
