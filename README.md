@@ -2,7 +2,7 @@
 
 ## Introduction
 
-`argparse.sh` contains bash functions that streamlines the management of command-line arguments in Bash scripts, enhancing the robustness and user-friendliness of your code. Its syntax is intentionally designed to be familiar to those who have experience with argument parsing libraries, providing a smooth and intuitive scripting experience.
+`argparse.sh` contains Bash functions that streamlines the management of command-line arguments in Bash scripts, enhancing the robustness and user-friendliness of your code. Its syntax is intentionally designed to be familiar to those who have experience with argument parsing libraries, providing a smooth and intuitive scripting experience.
 
 ## Features
 
@@ -11,12 +11,13 @@
 - **Default Values**: Define default values for optional arguments.
 - **Automatic Help Generation**: Generates a help message based on defined arguments.
 - **Error Handling**: Provides user-friendly error messages for missing or incorrect arguments.
+- **Bash v3+ compatibility**: Use `argparse3.sh` if your script needs to support Bash v3. `argparse.sh` supports Bash v4+. 
 
 [![asciicast](https://asciinema.org/a/627909.svg)](https://asciinema.org/a/627909)
 
 ## Installation
 
-clone the script repository.
+Clone the script repository.
 
 ```bash
 git clone https://github.com/yaacov/argparse-sh.git
@@ -24,8 +25,11 @@ git clone https://github.com/yaacov/argparse-sh.git
 
 You can now source `argparse.sh` in your Bash scripts to leverage its argument parsing capabilities.
 
+> If you need compatiblity with Bash v3+, source `argparse3.sh` instead.
+
 ```bash
 source /path/to/argparse.sh
+# source /path/to/argparse3.sh # Use 'argparse3.sh' if you need compatibility with Bash v3
 
 # Your code here
 ```
@@ -37,7 +41,6 @@ source /path/to/argparse.sh
 The `define_arg` function allows you to define a new command-line argument. The syntax is:
 
 ```bash
-
 define_arg "arg_name" ["default"] ["help text"] ["action"] ["required"]
 ```
 
@@ -46,8 +49,26 @@ define_arg "arg_name" ["default"] ["help text"] ["action"] ["required"]
 | arg_name | Name of the argument | No | |
 | default | Default value for the argument | Yes | "" |
 | help text | Description of the argument for the help message | Yes | "" |
-| action | Type of the argument (string or store_true for flags) | Yes | "string" |
-| required | Whether the argument is required (true or false) | Yes | "false" |
+| type | Type of the argument (string or store_true for flags) | Yes | "string" |
+| required | Whether the argument is required (`required`' or `optional`) | Yes | "optional" |
+
+#### Setting default empty values in `argparse3.sh`
+
+Bash v3 does not support **associative** arrays, so we store the properties of a defined argument as a *list* (integer-indexed array).
+Elements in the list are separated by spaces. That removes the ability to store the default value for an *string* argument as an empty string.
+Storing the value `""` (or `" "`, or any number of blank spaces) is interpreted by Bash as "space" and thus, considered an item separator, and not a *value* in the list.
+
+For that reason, you need to use a *placeholder* (`"null"`, by default) if you want to define an "empty string" (`""`) as the default value of an argument of type *string* in `argparse3.sh`.
+
+By default, `argparse3.sh` uses `"null"` as the *placeholder* for an empty default value.
+You can define the "empty" value changing the `_NULL_VALUE_` variable in `argparse3.sh`.
+
+```bash
+# `argparse.sh`, Bash v4+
+define_arg "username" "" "name of the user" "string" "optional"
+# `argparse3.sh`, Bash v3+
+define_arg "username" "null" "name of the user" "string" "optional"
+```
 
 ### Setting Script Description with `set_description`
 
@@ -64,7 +85,6 @@ When not set, the help text will show without a description text.
 After defining your arguments, use the `parse_args` function to parse the command-line inputs. Simply pass `"$@"` (the array of command-line arguments) to this function:
 
 ```bash
-
 parse_args "$@"
 ```
 
@@ -85,7 +105,7 @@ source ./argparse.sh
 set_description "This is a simple script that greets the user."
 
 # Define an argument
-define_arg "name" "" "Name of the user" "string" "true"
+define_arg "name" "" "Name of the user" "string" "required"
 
 # [Optional] Check for -h and --help
 check_for_help "$@"
@@ -100,7 +120,6 @@ echo "Hello, $name!"
 Run this script using:
 
 ```bash
-
 ./yourscript.sh --name Alice
 ```
 
