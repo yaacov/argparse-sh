@@ -38,9 +38,13 @@ set_description() {
 
 # Function to define a command-line argument
 # Usage: define_arg "arg_name" ["default"] ["help text"] ["type"] ["required"]
+_NULL_VALUE_="null"
 define_arg() {
     local arg_name=$1
     ARG_PROPERTIES["$arg_name,default"]=${2:-""} # Default value
+    if [[ "$2" == "$_NULL_VALUE_" ]]; then
+        ARG_PROPERTIES["$arg_name,default"]="" # Default value (for compatibility with 'argparse3.sh')
+    fi
     ARG_PROPERTIES["$arg_name,help"]=${3:-""}    # Help text
     ARG_PROPERTIES["$arg_name,type"]=${4:-"string"} # Type [ "string" | "bool" ], default is "string".
     ARG_PROPERTIES["$arg_name,required"]=${5:-"optional"} # Required flag ["required" | "optional"], default is "optional"
