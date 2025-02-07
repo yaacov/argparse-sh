@@ -7,7 +7,7 @@ source ./argparse.sh
 set_description "This script demonstrates handling flags."
 
 # Define a flag argument
-define_arg "debug" "false" "Enable debug mode" "store_true"
+define_arg "debug" "false" "Enable debug mode" "bool"
 
 # Check for -h and --help
 check_for_help "$@"
