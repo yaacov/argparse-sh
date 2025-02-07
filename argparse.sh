@@ -37,13 +37,13 @@ set_description() {
 }
 
 # Function to define a command-line argument
-# Usage: define_arg "arg_name" ["default"] ["help text"] ["action"] ["required"]
+# Usage: define_arg "arg_name" ["default"] ["help text"] ["type"] ["required"]
 define_arg() {
     local arg_name=$1
     ARG_PROPERTIES["$arg_name,default"]=${2:-""} # Default value
     ARG_PROPERTIES["$arg_name,help"]=${3:-""}    # Help text
-    ARG_PROPERTIES["$arg_name,action"]=${4:-"string"} # Action, default is "string"
-    ARG_PROPERTIES["$arg_name,required"]=${5:-"false"} # Required flag, default is "false"
+    ARG_PROPERTIES["$arg_name,type"]=${4:-"string"} # Type [ "string" | "bool" ], default is "string".
+    ARG_PROPERTIES["$arg_name,required"]=${5:-"optional"} # Required flag ["required" | "optional"], default is "optional"
 }
 
 # Function to parse command-line arguments
@@ -54,7 +54,7 @@ parse_args() {
         key="${key#--}" # Remove the '--' prefix
 
         if [[ -n "${ARG_PROPERTIES[$key,help]}" ]]; then
-            if [[ "${ARG_PROPERTIES[$key,action]}" == "store_true" ]]; then
+            if [[ "${ARG_PROPERTIES[$key,type]}" == "bool" ]]; then
                 export "$key"="true"
                 shift # past the flag argument
             else
@@ -71,7 +71,7 @@ parse_args() {
     # Check for required arguments
     for arg in "${!ARG_PROPERTIES[@]}"; do
         arg_name="${arg%%,*}" # Extract argument name
-        [[ "${ARG_PROPERTIES[$arg_name,required]}" == "true" && -z "${!arg_name}" ]] && display_error "Missing required argument --$arg_name"
+        [[ "${ARG_PROPERTIES[$arg_name,required]}" == "required" && -z "${!arg_name}" ]] && display_error "Missing required argument --$arg_name"
     done
 
     # Set defaults for any unset arguments
@@ -91,7 +91,7 @@ show_help() {
     for arg in "${!ARG_PROPERTIES[@]}"; do
         arg_name="${arg%%,*}" # Extract argument name
         [[ "${arg##*,}" == "help" ]] && {
-            [[ "${ARG_PROPERTIES[$arg_name,action]}" != "store_true" ]] && echo "  --$arg_name [TXT]: ${ARG_PROPERTIES[$arg]}" || echo "  --$arg_name: ${ARG_PROPERTIES[$arg]}"
+            [[ "${ARG_PROPERTIES[$arg_name,type]}" != "bool" ]] && echo "  --$arg_name [TXT]: ${ARG_PROPERTIES[$arg]}" || echo "  --$arg_name: ${ARG_PROPERTIES[$arg]}"
         }
     done
 }
