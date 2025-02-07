@@ -47,10 +47,12 @@ define_arg "arg_name" ["default"] ["help text"] ["action"] ["required"]
 | Parameter | Description | Optional | Default |
 | --- | --- | --- | --- |
 | arg_name | Name of the argument | No | |
-| default | Default value for the argument | Yes | "" |
+| default | Default value for the argument | Yes | "" (*) |
 | help text | Description of the argument for the help message | Yes | "" |
 | type | Type of the argument (string or store_true for flags) | Yes | "string" |
 | required | Whether the argument is required (`required`' or `optional`) | Yes | "optional" |
+
+*= For compatibility reasons with `argparse3.sh`, you can also use a *placeholder* to set an "empty value" in `argparse.sh`. By default, the *placeholder* value is `"null"`, but it can be defined setting the `_NULL_VALUE_` variable in `argparse.sh`.
 
 #### Setting default empty values in `argparse3.sh`
 
@@ -64,9 +66,9 @@ By default, `argparse3.sh` uses `"null"` as the *placeholder* for an empty defau
 You can define the "empty" value changing the `_NULL_VALUE_` variable in `argparse3.sh`.
 
 ```bash
-# `argparse.sh`, Bash v4+
+# 'argparse.sh', Bash v4+
 define_arg "username" "" "name of the user" "string" "optional"
-# `argparse3.sh`, Bash v3+
+# 'argparse3.sh', Bash v3+
 define_arg "username" "null" "name of the user" "string" "optional"
 ```
 
