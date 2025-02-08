@@ -18,7 +18,7 @@ parse_args "$@"
 
 # Main script logic
 if [[ "$username" == "" ]]; then
-   username="World!"
+   username="World"
 fi
 
 echo "Hello $username! $greeting"
