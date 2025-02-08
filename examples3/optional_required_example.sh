@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source the argparse script
-source ./argparse.sh
+source ./argparse3.sh
 
 # Set script description
 set_description "This script demonstrates optional and required arguments."
@@ -9,10 +9,7 @@ set_description "This script demonstrates optional and required arguments."
 # Define arguments
 define_arg "output" "./output.txt" "Path to output file" "string"
 define_arg "verbose" "false" "Enable verbose mode" "bool"
-define_arg "mode" "" "Operation mode" "string" "required"
-
-# Check for -h and --help
-check_for_help "$@"
+define_arg "mode" "null" "Operation mode" "string" "required"
 
 # Parse the arguments
 parse_args "$@"

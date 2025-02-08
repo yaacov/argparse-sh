@@ -1,16 +1,13 @@
 #!/bin/bash
 
 # Source the argparse script
-source ./argparse.sh
+source ./argparse3.sh
 
 # Set script description
 set_description "This script demonstrates handling flags."
 
 # Define a flag argument
 define_arg "debug" "false" "Enable debug mode" "bool"
-
-# Check for -h and --help
-check_for_help "$@"
 
 # Parse the arguments
 parse_args "$@"

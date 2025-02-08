@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source the argparse script
-source ./argparse.sh
+source ./argparse3.sh
 
 # Define an argument
 define_arg "username" "" "Username for login" "string" "required"
