@@ -54,6 +54,11 @@ define_arg "arg_name" ["default"] ["help text"] ["action"] ["required"]
 
 *= For compatibility reasons with `argparse3.sh`, you can also use a *placeholder* to set an "empty value" in `argparse.sh`. By default, the *placeholder* value is `"null"`, but it can be defined setting the `_NULL_VALUE_` variable in `argparse.sh`.
 
+In `argparse.sh`
+All arguments must have a long form name. Short form names are added in the form `arg_name|n` and is called as either `--arg_name` or `-n`. Multiple short arguments may be grouped behind a single `-`, but only the last may take an argument.
+
+In `argparse3.sh` currently only long form names are supported.
+
 #### Setting default empty values in `argparse3.sh`
 
 Bash v3 does not support **associative** arrays, so we store the properties of a defined argument as a *list* (integer-indexed array).
@@ -107,7 +112,7 @@ source ./argparse.sh
 set_description "This is a simple script that greets the user."
 
 # Define an argument
-define_arg "name" "" "Name of the user" "string" "required"
+define_arg "name|n" "" "Name of the user" "string" "required"
 
 # [Optional] Check for -h and --help
 check_for_help "$@"
@@ -123,6 +128,8 @@ Run this script using:
 
 ```bash
 ./yourscript.sh --name Alice
+# or
+./yourscript.sh -n Alice
 ```
 
 ## Contributing
