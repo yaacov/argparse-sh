@@ -1,0 +1,8 @@
+# Thin test runner on top of the prebuilt Bash 3.2 base image.
+# Build base first: docker build -f tests/Dockerfile.fedora44-bash3-base -t argparse-sh:fedora44-bash3-base .
+FROM argparse-sh:fedora44-bash3-base
+
+WORKDIR /work
+ENV BASH_BIN=/opt/bash-3.2/bin/bash
+ENV PATH=/opt/bash-3.2/bin:$PATH
+CMD ["/opt/bash-3.2/bin/bash", "/work/tests/suite.sh"]

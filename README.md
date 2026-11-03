@@ -11,7 +11,7 @@
 - **Default Values**: Define default values for optional arguments.
 - **Automatic Help Generation**: Generates a help message based on defined arguments.
 - **Error Handling**: Provides user-friendly error messages for missing or incorrect arguments.
-- **Bash v3+ compatibility**: Use `argparse3.sh` if your script needs to support Bash v3. `argparse.sh` supports Bash v4+. 
+- **Bash 3.2+ compatibility**: Works on macOS system Bash 3.2 and modern Bash 4+/5.x (e.g. Fedora).
 
 [![asciicast](https://asciinema.org/a/627909.svg)](https://asciinema.org/a/627909)
 
@@ -25,11 +25,8 @@ git clone https://github.com/yaacov/argparse-sh.git
 
 You can now source `argparse.sh` in your Bash scripts to leverage its argument parsing capabilities.
 
-> If you need compatiblity with Bash v3+, source `argparse3.sh` instead.
-
 ```bash
 source /path/to/argparse.sh
-# source /path/to/argparse3.sh # Use 'argparse3.sh' if you need compatibility with Bash v3
 
 # Your code here
 ```
@@ -52,30 +49,14 @@ define_arg "arg_name" ["default"] ["help text"] ["action"] ["required"]
 | type | Type of the argument (string or bool for flags) | Yes | "string" |
 | required | Whether the argument is required (`required`' or `optional`) | Yes | "optional" |
 
-*= For compatibility reasons with `argparse3.sh`, you can also use a *placeholder* to set an "empty value" in `argparse.sh`. By default, the *placeholder* value is `"null"`, but it can be defined setting the `_NULL_VALUE_` variable in `argparse.sh`.
-
-In `argparse.sh`
-All arguments must have a long form name. Short form names are added in the form `arg_name|n` and is called as either `--arg_name` or `-n`. Multiple short arguments may be grouped behind a single `-`, but only the last may take an argument.
-
-In `argparse3.sh` currently only long form names are supported.
-
-#### Setting default empty values in `argparse3.sh`
-
-Bash v3 does not support **associative** arrays, so we store the properties of a defined argument as a *list* (integer-indexed array).
-Elements in the list are separated by spaces. That removes the ability to store the default value for an *string* argument as an empty string.
-Storing the value `""` (or `" "`, or any number of blank spaces) is interpreted by Bash as "space" and thus, considered an item separator, and not a *value* in the list.
-
-For that reason, you need to use a *placeholder* (`"null"`, by default) if you want to define an "empty string" (`""`) as the default value of an argument of type *string* in `argparse3.sh`.
-
-By default, `argparse3.sh` uses `"null"` as the *placeholder* for an empty default value.
-You can define the "empty" value changing the `_NULL_VALUE_` variable in `argparse3.sh`.
+\*= You can also use a *placeholder* to set an empty default. By default the placeholder is `"null"` (override via `_NULL_VALUE_`). Both `""` and `"null"` mean an empty string default:
 
 ```bash
-# 'argparse.sh', Bash v4+
 define_arg "username" "" "name of the user" "string" "optional"
-# 'argparse3.sh', Bash v3+
-define_arg "username" "null" "name of the user" "string" "optional"
+define_arg "greeting" "null" "greeting text" "string" "optional"
 ```
+
+All arguments must have a long form name. Short form names are added as `arg_name|n` and can be called as either `--arg_name` or `-n`. Multiple short arguments may be grouped behind a single `-`, but only the last may take a value.
 
 ### Setting Script Description with `set_description`
 
@@ -102,7 +83,6 @@ This function will process the inputs based on the defined arguments and handle 
 Here's a simple example of a script using argparse.sh:
 
 ```bash
-
 #!/bin/bash
 
 # Source the argparse script
@@ -131,6 +111,24 @@ Run this script using:
 # or
 ./yourscript.sh -n Alice
 ```
+
+## Tests
+
+Run the suite against the local Bash interpreter (no Docker):
+
+```bash
+./tests/suite.sh
+```
+
+GitHub Actions runs this same suite on `ubuntu-latest` with the runner's system Bash.
+
+Docker-based tests cover **Fedora 44** with system Bash 5.x and a side-installed Bash 3.2:
+
+```bash
+./tests/run.sh
+```
+
+This builds the Fedora 44 images and runs [`tests/suite.sh`](tests/suite.sh) in each. Bash 3.2 is compiled into a reusable base image (`argparse-sh:fedora44-bash3-base`) on first run and reused afterward. Requires Docker (or a compatible `docker` CLI).
 
 ## Contributing
 

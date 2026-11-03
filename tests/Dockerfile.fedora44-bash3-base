@@ -1,0 +1,20 @@
+FROM fedora:44
+
+# Reusable layer: Fedora 44 + Bash 3.2.57 installed side-by-side under /opt/bash-3.2
+# Built once and tagged argparse-sh:fedora44-bash3-base; test runner reuses this image.
+RUN dnf -y install bash gcc make bison ncurses-devel curl tar \
+    && curl -fsSL -o /tmp/bash-3.2.57.tar.gz https://ftp.gnu.org/gnu/bash/bash-3.2.57.tar.gz \
+    && tar -xzf /tmp/bash-3.2.57.tar.gz -C /tmp \
+    && cd /tmp/bash-3.2.57 \
+    && curl -fsSL -o support/config.guess https://raw.githubusercontent.com/gcc-mirror/gcc/master/config.guess \
+    && curl -fsSL -o support/config.sub https://raw.githubusercontent.com/gcc-mirror/gcc/master/config.sub \
+    && chmod +x support/config.guess support/config.sub \
+    && export CC="gcc -std=gnu89" \
+    && export CFLAGS="-std=gnu89 -Wno-implicit-function-declaration -Wno-builtin-declaration-mismatch" \
+    && ./configure --prefix=/opt/bash-3.2 --build="$(uname -m)-redhat-linux-gnu" \
+    && make -j1 CFLAGS="$CFLAGS" \
+    && make install \
+    && /opt/bash-3.2/bin/bash --version \
+    && rm -rf /tmp/bash-3.2.57 /tmp/bash-3.2.57.tar.gz \
+    && dnf -y remove gcc make bison ncurses-devel \
+    && dnf clean all

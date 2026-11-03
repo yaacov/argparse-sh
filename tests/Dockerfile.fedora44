@@ -1,0 +1,10 @@
+FROM fedora:44
+
+# System Bash 5.x on Fedora 44
+RUN dnf -y install bash \
+    && dnf clean all \
+    && bash --version
+
+WORKDIR /work
+ENV BASH_BIN=/bin/bash
+CMD ["/bin/bash", "/work/tests/suite.sh"]

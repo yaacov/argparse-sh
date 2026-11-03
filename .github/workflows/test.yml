@@ -1,0 +1,18 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  suite:
+    name: suite (system bash)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show bash version
+        run: bash --version | head -1
+
+      - name: Run test suite
+        run: BASH_BIN="$(command -v bash)" ./tests/suite.sh
