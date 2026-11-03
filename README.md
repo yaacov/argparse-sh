@@ -49,7 +49,7 @@ define_arg "arg_name" ["default"] ["help text"] ["action"] ["required"]
 | arg_name | Name of the argument | No | |
 | default | Default value for the argument | Yes | "" (*) |
 | help text | Description of the argument for the help message | Yes | "" |
-| type | Type of the argument (string or store_true for flags) | Yes | "string" |
+| type | Type of the argument (string or bool for flags) | Yes | "string" |
 | required | Whether the argument is required (`required`' or `optional`) | Yes | "optional" |
 
 *= For compatibility reasons with `argparse3.sh`, you can also use a *placeholder* to set an "empty value" in `argparse.sh`. By default, the *placeholder* value is `"null"`, but it can be defined setting the `_NULL_VALUE_` variable in `argparse.sh`.
